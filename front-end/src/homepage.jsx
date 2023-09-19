@@ -1,11 +1,26 @@
-import react from 'react';
+import React from 'react';
+import {
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Input, // Import the Input component from Chakra UI
+} from '@chakra-ui/react';
 
-const homepage = () => {
+const Homepage = () => {
   return (
     <>
-      <h1>homepage</h1>
+      <h1>Homepage</h1>
+      <FormControl>
+        <FormLabel>Username</FormLabel>
+        <Input type="text" placeholder="Username" /> {/* Use Input component */}
+        <FormHelperText>We'll never share your email.</FormHelperText>
+      </FormControl>
+      <FormControl>
+        <FormLabel>Password</FormLabel>
+        <Input type="password" placeholder="Password" /> {/* Use Input component */}
+      </FormControl>
     </>
   );
 }
 
-export default homepage;
+export default Homepage;
