@@ -4,9 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
+require("dotenv").config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+const dbstring = process.env.dbstring;
+
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const mongoDB = dbstring;
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+  console.log("Connected to MongoDB");
+  
+}
 
 var app = express();
 
