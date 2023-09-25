@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/',registerUser); 
+router.post('/',cors(),registerUser); 
 
 
 module.exports = router;
