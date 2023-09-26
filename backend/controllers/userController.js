@@ -4,7 +4,7 @@ const generateToken = require("../controllers/jwt.js");
 
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password,pic } = req.body;
+    const { name, email, password} = req.body;
     if (!name || !email || !password) {
       res.status(400);
       throw new Error("Please enter all fields");
@@ -21,7 +21,6 @@ const registerUser = asyncHandler(async (req, res) => {
             name,
             email,
             password,
-            pic,
           });
           if (user) {
             res.status(201).json({
@@ -29,12 +28,28 @@ const registerUser = asyncHandler(async (req, res) => {
               name: user.name,
               email: user.email,
               isAdmin: user.isAdmin,
-              pic: user.pic,
               token: generateToken(user._id),
               
             });
           } 
       
 });
+const authUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
 
-module.exports = registerUser;
+  const user = await User.findOne({ email });
+
+  if (user && (await user.matchPassword(password))) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid Email or Password");
+  }
+});
+module.exports = {authUser,registerUser};
