@@ -1,26 +1,63 @@
-import React from 'react';
 import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Input, // Import the Input component from Chakra UI
-} from '@chakra-ui/react';
+  Box,
+  Container,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+} from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useHistory } from "react-router";
+import React from 'react';
+import Signup from "../src/signup";
+import Login from "../src/login";
+function Homepage() {
+  const history = useHistory();
 
-const Homepage = () => {
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (user) history.push("/chats");
+  }, [history]);
+
   return (
-    <>
-      <h1>Homepage</h1>
-      <FormControl>
-        <FormLabel>Username</FormLabel>
-        <Input type="text" placeholder="Username" /> {/* Use Input component */}
-        <FormHelperText>We'll never share your email.</FormHelperText>
-      </FormControl>
-      <FormControl>
-        <FormLabel>Password</FormLabel>
-        <Input type="password" placeholder="Password" /> {/* Use Input component */}
-      </FormControl>
-    </>
+    <Container maxW="xl" centerContent>
+      <Box
+        d="flex"
+        justifyContent="center"
+        p={3}
+        bg="white"
+        w="100%"
+        m="40px 0 15px 0"
+        borderRadius="lg"
+        borderWidth="1px"
+      >
+        <Text fontSize="4xl" fontFamily="Work sans">
+          Talk-A-Tive
+        </Text>
+      </Box>
+      <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="1px">
+        <Tabs isFitted variant="soft-rounded">
+          <TabList mb="1em">
+            <Tab>Login</Tab>
+            <Tab>Sign Up</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <Login/>
+            </TabPanel>
+            <TabPanel>
+           
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
+    </Container>
   );
 }
 
 export default Homepage;
+
+

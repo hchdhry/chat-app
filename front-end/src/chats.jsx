@@ -3,6 +3,7 @@ import axios from "axios";
 
 const Chats = () => {
   const [chats, setChats] = useState([]);
+  
   const fetchdata = async () => {
     const {data} = await axios.get("http://localhost:3000/api/chats");
     console.log(data);
@@ -16,9 +17,7 @@ const Chats = () => {
   return (
     <>
     <div>
-      {chats.map(chat => (
-        <div>{chat.chatName}</div>
-      ))}
+      <h1>Chats</h1>
     </div>
   </>
   );
