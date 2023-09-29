@@ -18,21 +18,25 @@ const Login = () => {
   const history = useHistory();
 
   const submitHandler = async () => {
+   
     setLoading(true);
 
     try {
+      
       const config = {
+        
         headers: {
           "Content-type": "application/json",
         },
       };
-
+      
       const { data } = await axios.post(
-        "localhost:3000/login",
-        { email, password },
+        "http://localhost:3000/log-in",
+        { email:email, password:password },
         config
       );
-
+      console.log("After axios.post");
+      
       toast({
         title: "Login Successful",
         status: "success",
@@ -40,11 +44,11 @@ const Login = () => {
         isClosable: true,
         position: "bottom",
       });
-
-      
       setLoading(false);
       history.push("/chats");
-    } catch (error) {
+    } 
+  
+    catch (error) {
       toast({
         title: "Error Occurred!",
         description: error.response.data.message,
