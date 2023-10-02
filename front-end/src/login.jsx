@@ -35,8 +35,7 @@ const Login = () => {
         { email:email, password:password },
         config
       );
-      console.log("After axios.post");
-      
+
       toast({
         title: "Login Successful",
         status: "success",
@@ -45,7 +44,7 @@ const Login = () => {
         position: "bottom",
       });
       setLoading(false);
-      history.push("/chats");
+      history.push("/ajksckjssnkcj");
     } 
   
     catch (error) {

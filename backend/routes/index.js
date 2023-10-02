@@ -16,17 +16,25 @@ router.use(cors());
 router.get('/chats',cors(),(req,res)=>{
   res.send("yee");
 });
-router.post(
- 
-  "/log-in",
-  cors(),
-  passport.authenticate("local",{
-    successRedirect: "/chats",
-    failureRedirect: "/",
-    
-   
-  })
-);
+router.post("/log-in", cors(), (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+
+    if (!user) {
+      return res.status(401).json({ message: "Incorrect username or password" });
+    }
+
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+      }
+
+      return res.status(200).json({ message: "Login successful", user });
+    });
+  })(req, res, next);
+});
 
 
 module.exports = router;
