@@ -1,33 +1,21 @@
-const jwt = require("jsonwebtoken");
-const User = require("../models/userModel.js");
-const asyncHandler = require("express-async-handler");
+const express = require("express");
+const {
+  accessChat,
+  fetchChats,
+  createGroupChat,
+  removeFromGroup,
+  addToGroup,
+  renameGroup,
+} = require("../controllers/chatControllers");
+const { protect } = require("../middleware/authMiddleware");
 
-const protect = asyncHandler(async (req, res, next) => {
-  let token;
+const router = express.Router();
 
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    try {
-      token = req.headers.authorization.split(" ")[1];
+//router.route("/").post(protect, accessChat);
+router.route("/").get(protect, fetchChats);
+//router.route("/group").post(protect, createGroupChat);
+//router.route("/rename").put(protect, renameGroup);
+//router.route("/groupremove").put(protect, removeFromGroup);
+//router.route("/groupadd").put(protect, addToGroup);
 
-      //decodes token id
-      const decoded = jwt.verify(token, process.env.secret);
-
-      req.user = await User.findById(decoded.id).select("-password");
-
-      next();
-    } catch (error) {
-      res.status(401);
-      throw new Error("Not authorized, token failed");
-    }
-  }
-
-  if (!token) {
-    res.status(401);
-    throw new Error("Not authorized, no token");
-  }
-});
-
-module.exports = { protect };
+module.exports = router;

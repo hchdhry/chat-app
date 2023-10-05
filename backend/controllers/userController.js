@@ -42,6 +42,8 @@ const allUsers = asyncHandler(async (req, res) => {
       { email: { $regex: req.query.search, $options: 'i' } },
     ],
   };
+  const users = await User.find(keyword);
+  res.send(users);
 });
 
 module.exports = {registerUser,allUsers};

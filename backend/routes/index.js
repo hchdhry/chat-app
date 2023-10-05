@@ -6,10 +6,8 @@ const {registerUser,allUsers} = require("../controllers/userController");
 const passport = require('../passport');
 
 
-
-
 router.post('/', cors(), registerUser);
-router.get('/', allUsers); 
+router.get('/api/user', allUsers); 
 router.use(cors());
 router.get('/chats',cors(),(req,res)=>{
   res.send("yee");
