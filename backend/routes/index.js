@@ -4,10 +4,12 @@ const chats = require("../data");
 const cors = require('cors');
 const {registerUser,allUsers} = require("../controllers/userController");
 const passport = require('../passport');
+const generateToken = require("../controllers/jwt");
+const {protect} = require("../auhtMiddleware");
 
 
 router.post('/', cors(), registerUser);
-router.get('/api/user', allUsers); 
+router.get('/api/user',protect ,allUsers); 
 router.use(cors());
 router.get('/chats',cors(),(req,res)=>{
   res.send("yee");
@@ -27,7 +29,8 @@ router.post("/log-in", cors(), (req, res, next) => {
         return res.status(500).json({ message: "Internal Server Error" });
       }
 
-      return res.status(200).json({ message: "Login successful", user });
+      return res.status(200).json({ message: "Login successful", user,
+    token: generateToken(user._id), });
     });
   })(req, res, next);
 });
