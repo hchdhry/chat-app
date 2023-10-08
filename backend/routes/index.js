@@ -9,7 +9,7 @@ const {protect} = require("../auhtMiddleware");
 
 
 router.post('/', cors(), registerUser);
-router.get('/api/user',protect ,allUsers); 
+router.get('/api/user',protect,allUsers); 
 router.use(cors());
 router.get('/chats',cors(),(req,res)=>{
   res.send("yee");
