@@ -8,12 +8,12 @@ const generateToken = require("../controllers/jwt");
 const {protect} = require("../auhtMiddleware");
 
 
-router.post('/', cors(), registerUser);
+//router.post('/', cors(), registerUser);
 router.get('/api/user',protect,allUsers); 
 router.use(cors());
-router.get('/chats',cors(),(req,res)=>{
-  res.send("yee");
-});
+//router.get('/chats',cors(),(req,res)=>{
+//  res.send("yee");
+//});
 router.post("/log-in", cors(), (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
