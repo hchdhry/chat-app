@@ -6,7 +6,7 @@ const {registerUser,allUsers} = require("../controllers/userController");
 const passport = require('../passport');
 const generateToken = require("../controllers/jwt");
 const {protect} = require("../auhtMiddleware");
-
+const {accessChat} = require("../controllers/chatController");
 
 //router.post('/', cors(), registerUser);
 router.get('/api/user',protect,allUsers); 
