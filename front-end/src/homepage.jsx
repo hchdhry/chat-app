@@ -49,7 +49,7 @@ function Homepage() {
               <Login/>
             </TabPanel>
             <TabPanel>
-           
+              <Signup/>
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -14,6 +14,7 @@ router.use(cors());
 //router.get('/chats',cors(),(req,res)=>{
 //  res.send("yee");
 //});
+router.post("/register",registerUser)
 router.post("/log-in", cors(), (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
