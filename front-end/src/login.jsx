@@ -44,7 +44,7 @@ const Login = () => {
         position: "bottom",
       });
       setLoading(false);
-      history.push("/ajksckjssnkcj");
+      history.push("/chats");
     } 
   
     catch (error) {
